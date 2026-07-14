@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" font-family="Menlo, Consolas, monospace" font-size="14">
+  <rect width="760" height="420" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="380" y="27" fill="#8b949e" text-anchor="middle" font-size="12">whydied — one verdict, with kernel-log receipts</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="62"><tspan fill="#7ee787">$</tspan> kubectl logs job/etl   <tspan fill="#8b949e"># … container exited with code 137. why?</tspan></text>
+    <text x="24" y="94"><tspan fill="#7ee787">$</tspan> whydied pid 1337 --kmsg node-a.dmesg</text>
+    <text x="24" y="122"><tspan fill="#f85149">verdict:</tspan> java (pid 1337) was killed by the kernel OOM killer:</text>
+    <text x="24" y="142">         its cgroup hit the memory limit</text>
+    <text x="24" y="166">cause: <tspan fill="#ffa657">oom-kill-cgroup</tspan>   confidence: <tspan fill="#7ee787">confirmed</tspan></text>
+    <text x="24" y="198" fill="#d2a8ff">evidence:</text>
+    <text x="24" y="220" fill="#8b949e">  [kernel log] [74108.201549] Memory cgroup out of memory: Killed</text>
+    <text x="24" y="240" fill="#8b949e">               process 1337 (java) total-vm:7000840kB, anon-rss:519168kB …</text>
+    <text x="24" y="262" fill="#8b949e">  [kernel log] at kill time the process held anon-rss <tspan fill="#79c0ff">507.0 MiB</tspan></text>
+    <text x="24" y="284" fill="#8b949e">  [kernel log] the cgroup that hit its limit: <tspan fill="#79c0ff">/kubepods.slice/…/pod7c1a9f2e</tspan></text>
+    <text x="24" y="316" fill="#d2a8ff">advice:</text>
+    <text x="24" y="338" fill="#8b949e">  - raise the cgroup limit (memory.max / resources.limits.memory) or</text>
+    <text x="24" y="358" fill="#8b949e">    shrink the workload</text>
+    <text x="24" y="390"><tspan fill="#7ee787">$</tspan> whydied run -- ./etl.sh        <tspan fill="#8b949e"># or supervise the rerun live</tspan></text>
+  </g>
+</svg>

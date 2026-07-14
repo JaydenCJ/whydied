@@ -1,0 +1,23 @@
+[    0.000000] Linux version 6.6.13 (build@example.test) (gcc 13.2.0) #1 SMP PREEMPT_DYNAMIC
+[    0.004201] Command line: BOOT_IMAGE=/boot/vmlinuz-6.6.13 root=/dev/vda1 ro quiet
+[   12.481221] systemd[1]: Started Journal Service.
+[74108.201335] java invoked oom-killer: gfp_mask=0xcc0(GFP_KERNEL), order=0, oom_score_adj=979
+[74108.201349] CPU: 3 PID: 1337 Comm: java Not tainted 6.6.13 #1
+[74108.201355] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996)
+[74108.201410] memory: usage 524288kB, limit 524288kB, failcnt 8121
+[74108.201414] swap: usage 0kB, limit 0kB, failcnt 0
+[74108.201502] Tasks state (memory values in pages):
+[74108.201503] [  pid  ]   uid  tgid total_vm      rss pgtables_bytes swapents oom_score_adj name
+[74108.201530] [   1337]     0  1337  1750210   130560  1471488        0           979 java
+[74108.201541] oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=/,mems_allowed=0,oom_memcg=/kubepods.slice/kubepods-burstable.slice/pod7c1a9f2e,task_memcg=/kubepods.slice/kubepods-burstable.slice/pod7c1a9f2e/cri-containerd-4be2f81a,task=java,pid=1337,uid=0
+[74108.201549] Memory cgroup out of memory: Killed process 1337 (java) total-vm:7000840kB, anon-rss:519168kB, file-rss:3072kB, shmem-rss:0kB, UID:0 pgtables:1437kB oom_score_adj:979
+[74108.219872] oom_reaper: reaped process 1337 (java), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+[74211.870041] myapp[4242]: segfault at 0 ip 0000557a1c2e4f10 sp 00007ffd93c1a2c0 error 4 in myapp[557a1c2b0000+9d000] likely on CPU 5 (core 5, socket 0)
+[74211.870059] Code: 48 89 e5 48 83 ec 10 48 89 7d f8 48 8b 45 f8 48 8b 00 5d c3
+Jul 12 16:09:14 node-a kernel: [74233.402118] stress invoked oom-killer: gfp_mask=0x140dca(GFP_HIGHUSER_MOVABLE|__GFP_COMP|__GFP_ZERO), order=0, oom_score_adj=0
+Jul 12 16:09:14 node-a kernel: [74233.402161] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/session-4.scope,task=stress,pid=2001,uid=1000
+Jul 12 16:09:14 node-a kernel: [74233.402170] Out of memory: Killed process 2001 (stress) total-vm:8394204kB, anon-rss:7912448kB, file-rss:1024kB, shmem-rss:0kB, UID:1000 pgtables:15672kB oom_score_adj:0
+6,1201,74310202331,-;traps: crasher[7707] trap divide error ip:401126 sp:7ffe45b2c860 error:0 in crasher[401000+1000]
+ SUBSYSTEM=traps
+[74399.118240] traps: pluginhost[8090] general protection fault ip:7f2a81c440b7 sp:7ffc19d02040 error:0 in libplugin.so.1[7f2a81c2f000+2b000]
+[74450.003117] eth0: link becomes ready
